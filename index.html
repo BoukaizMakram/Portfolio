@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - 3D Scene</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas id="webgl"></canvas>
+    <button id="start-experience">Start Experience</button>
+    <div class="loading-screen" id="loading-screen">
+        <div class="loader"></div>
+        <p>Loading 3D Scene...</p>
+    </div>
+
+    <div class="camera-info" id="camera-info" style="display: none;">
+        <div>Camera Position: <span id="cam-pos">-</span></div>
+        <div>Camera Rotation: <span id="cam-rot">-</span></div>
+        <div>Looking At: <span id="cam-target">-</span></div>
+        <button id="test-os" style="margin-top: 10px; padding: 5px 10px; background: #00ff00; border: none; border-radius: 3px; cursor: pointer;">Test OS</button>
+    </div>
+
+    <div class="controls-panel" id="controls-panel" style="display: none;">
+        <h3>Light Controls</h3>
+
+        <div class="control-group">
+            <h4>Key Light</h4>
+            <label>
+                Intensity: <span id="key-intensity-val">2.0</span>
+                <input type="range" id="key-intensity" min="0" max="5" step="0.1" value="2.0">
+            </label>
+            <label>
+                Position X: <span id="key-x-val">5</span>
+                <input type="range" id="key-x" min="-20" max="20" step="0.5" value="5">
+            </label>
+            <label>
+                Position Y: <span id="key-y-val">10</span>
+                <input type="range" id="key-y" min="0" max="30" step="0.5" value="10">
+            </label>
+            <label>
+                Position Z: <span id="key-z-val">8</span>
+                <input type="range" id="key-z" min="-20" max="20" step="0.5" value="8">
+            </label>
+            <label>
+                Shadow Radius: <span id="key-radius-val">10</span>
+                <input type="range" id="key-radius" min="0" max="20" step="1" value="10">
+            </label>
+            <label>
+                <input type="checkbox" id="key-shadow"> Cast Shadows
+            </label>
+        </div>
+
+        <div class="control-group">
+            <h4>Fill Light</h4>
+            <label>
+                Intensity: <span id="fill-intensity-val">0.8</span>
+                <input type="range" id="fill-intensity" min="0" max="3" step="0.1" value="0.8">
+            </label>
+            <label>
+                <input type="checkbox" id="fill-visible" checked> Visible
+            </label>
+            <label>
+                <input type="checkbox" id="fill-shadow"> Cast Shadows
+            </label>
+        </div>
+
+        <div class="control-group">
+            <h4>Ambient Light</h4>
+            <label>
+                Intensity: <span id="ambient-intensity-val">1.2</span>
+                <input type="range" id="ambient-intensity" min="0" max="3" step="0.1" value="1.2">
+            </label>
+        </div>
+
+        <div class="control-group">
+            <h4>Rim Light</h4>
+            <label>
+                Intensity: <span id="rim-intensity-val">0.5</span>
+                <input type="range" id="rim-intensity" min="0" max="2" step="0.1" value="0.5">
+            </label>
+            <label>
+                <input type="checkbox" id="rim-visible" checked> Visible
+            </label>
+            <label>
+                <input type="checkbox" id="rim-shadow"> Cast Shadows
+            </label>
+        </div>
+
+        <div class="control-group">
+            <h4>Display Options</h4>
+            <label>
+                <input type="checkbox" id="show-helpers"> Show Light Helpers
+            </label>
+        </div>
+
+        <div class="control-group">
+            <h4>3D UI Controls</h4>
+            <label>
+                Scale: <input type="text" id="ui-scale-val" value="0.0007" style="width: 60px; background: #222; color: #00ff00; border: 1px solid #444; padding: 2px 5px; border-radius: 3px; font-family: monospace;">
+                <input type="range" id="ui-scale" min="0.0005" max="0.005" step="0.0001" value="0.0007">
+            </label>
+            <label>
+                Offset X: <input type="text" id="ui-offset-x-val" value="0.00" style="width: 60px; background: #222; color: #00ff00; border: 1px solid #444; padding: 2px 5px; border-radius: 3px; font-family: monospace;">
+                <input type="range" id="ui-offset-x" min="-1" max="1" step="0.05" value="0">
+            </label>
+            <label>
+                Offset Y: <input type="text" id="ui-offset-y-val" value="0.23" style="width: 60px; background: #222; color: #00ff00; border: 1px solid #444; padding: 2px 5px; border-radius: 3px; font-family: monospace;">
+                <input type="range" id="ui-offset-y" min="-1" max="1" step="0.01" value="0.23">
+            </label>
+            <label>
+                Offset Z: <input type="text" id="ui-offset-z-val" value="0.05" style="width: 60px; background: #222; color: #00ff00; border: 1px solid #444; padding: 2px 5px; border-radius: 3px; font-family: monospace;">
+                <input type="range" id="ui-offset-z" min="-1" max="2" step="0.05" value="0.05">
+            </label>
+        </div>
+
+        <div class="control-group">
+            <h4>UI Container Size</h4>
+            <label>
+                Width: <input type="text" id="ui-width-val" value="1910" style="width: 60px; background: #222; color: #00ff00; border: 1px solid #444; padding: 2px 5px; border-radius: 3px; font-family: monospace;">
+                <input type="range" id="ui-width" min="800" max="3840" step="10" value="1910">
+            </label>
+            <label>
+                Height: <input type="text" id="ui-height-val" value="1300" style="width: 60px; background: #222; color: #00ff00; border: 1px solid #444; padding: 2px 5px; border-radius: 3px; font-family: monospace;">
+                <input type="range" id="ui-height" min="450" max="2160" step="10" value="1300">
+            </label>
+            <label>
+                <input type="checkbox" id="ui-maintain-ratio" checked> Maintain 16:9 Ratio
+            </label>
+        </div>
+
+        <div class="control-group">
+            <h4>UI Rotation</h4>
+            <label>
+                Rotation X: <input type="text" id="ui-rotation-x-val" value="0" style="width: 60px; background: #222; color: #00ff00; border: 1px solid #444; padding: 2px 5px; border-radius: 3px; font-family: monospace;">
+                <input type="range" id="ui-rotation-x" min="0" max="360" step="1" value="0">
+            </label>
+            <label>
+                Rotation Y: <input type="text" id="ui-rotation-y-val" value="0" style="width: 60px; background: #222; color: #00ff00; border: 1px solid #444; padding: 2px 5px; border-radius: 3px; font-family: monospace;">
+                <input type="range" id="ui-rotation-y" min="0" max="360" step="1" value="0">
+            </label>
+            <label>
+                Rotation Z: <input type="text" id="ui-rotation-z-val" value="0" style="width: 60px; background: #222; color: #00ff00; border: 1px solid #444; padding: 2px 5px; border-radius: 3px; font-family: monospace;">
+                <input type="range" id="ui-rotation-z" min="0" max="360" step="1" value="0">
+            </label>
+        </div>
+    </div>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/"
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script type="module" src="main.js"></script>
+</body>
+</html>

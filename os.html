@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Makram Boukaiz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #000;
+            --surface: #111;
+            --surface-hover: #161616;
+            --surface-active: #1a1a1a;
+            --elevated: #0a0a0a;
+            --border: rgba(255, 255, 255, 0.06);
+            --border-hover: rgba(255, 255, 255, 0.12);
+            --text-primary: #fff;
+            --text-secondary: #999;
+            --text-tertiary: #666;
+            --text-muted: #444;
+            --icon-fill: #fff;
+            --icon-bg: #161616;
+            --glass-bg: rgba(0, 0, 0, 0.85);
+            --glass-dock: rgba(10, 10, 10, 0.8);
+            --glass-border: rgba(255, 255, 255, 0.06);
+            --hover-overlay: rgba(255, 255, 255, 0.04);
+            --active-overlay: rgba(255, 255, 255, 0.07);
+            --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.5);
+            --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.5), 0 0 0 0.5px rgba(255, 255, 255, 0.04);
+            --shadow-lg: 0 4px 24px rgba(0, 0, 0, 0.5), 0 0 0 0.5px rgba(255, 255, 255, 0.06);
+            --shadow-hover: 0 6px 20px rgba(0, 0, 0, 0.6);
+            --scrollbar: #333;
+            --code-bg: #161616;
+            --code-color: #f48771;
+            --pre-bg: #0a0a0a;
+            --link-color: #ddd;
+            --link-underline: #444;
+            --link-underline-hover: #ddd;
+            --blockquote-border: #333;
+            --blockquote-color: #777;
+        }
+
+        [data-theme="light"] {
+            --bg: #f2f2f2;
+            --surface: #fafafa;
+            --surface-hover: #f5f5f5;
+            --surface-active: #f0f0f0;
+            --elevated: #fff;
+            --border: rgba(0, 0, 0, 0.06);
+            --border-hover: rgba(0, 0, 0, 0.12);
+            --text-primary: #000;
+            --text-secondary: #555;
+            --text-tertiary: #888;
+            --text-muted: #999;
+            --icon-fill: #000;
+            --icon-bg: white;
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-dock: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(0, 0, 0, 0.08);
+            --hover-overlay: rgba(0, 0, 0, 0.05);
+            --active-overlay: rgba(0, 0, 0, 0.08);
+            --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08), 0 0 0 0.5px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 4px 24px rgba(0, 0, 0, 0.08), 0 0 0 0.5px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 6px 20px rgba(0, 0, 0, 0.1);
+            --scrollbar: #ddd;
+            --code-bg: #f5f5f5;
+            --code-color: #c7254e;
+            --pre-bg: #1a1a1a;
+            --link-color: #000;
+            --link-underline: #ccc;
+            --link-underline-hover: #000;
+            --blockquote-border: #ddd;
+            --blockquote-color: #777;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 125%;
+            background: var(--bg);
+            display: flex;
+            flex-direction: column;
+            transition: background 0.4s ease;
+        }
+
+        /* ── Menu Bar ── */
+        .menu-bar {
+            background: var(--glass-bg);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            padding: 0 32px;
+            height: 56px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-bottom: 1px solid var(--glass-border);
+            font-size: 16px;
+            color: var(--text-secondary);
+            flex-shrink: 0;
+            z-index: 100;
+            transition: background 0.4s ease, border-color 0.4s ease, color 0.4s ease;
+        }
+
+        .menu-brand {
+            font-weight: 700;
+            font-size: 17px;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+            transition: color 0.4s ease;
+        }
+
+        .menu-item {
+            cursor: pointer;
+            padding: 4px 12px;
+            border-radius: 5px;
+            font-size: 15px;
+            font-weight: 450;
+            color: var(--text-secondary);
+            transition: background 0.12s, color 0.4s ease;
+        }
+
+        .menu-item:hover { background: var(--hover-overlay); }
+
+        .menu-right {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .menu-time {
+            font-size: 15px;
+            color: var(--text-secondary);
+            font-weight: 450;
+            font-variant-numeric: tabular-nums;
+            transition: color 0.4s ease;
+        }
+
+        .menu-close {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            color: var(--text-muted);
+            transition: all 0.12s;
+        }
+
+        .menu-close:hover {
+            background: rgba(255, 59, 48, 0.1);
+            color: #ff3b30;
+        }
+
+        /* ── Desktop ── */
+        .desktop {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            min-height: 0;
+        }
+
+        .desktop-bg {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ── Desktop Icons ── */
+        .desktop-icons {
+            position: absolute;
+            top: 36px;
+            right: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .desktop-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            padding: 14px 20px;
+            border-radius: 12px;
+            width: 120px;
+            transition: background 0.12s;
+        }
+
+        .desktop-icon:hover {
+            background: var(--hover-overlay);
+        }
+
+        .desktop-icon:active {
+            background: var(--active-overlay);
+        }
+
+        .icon-img {
+            width: 80px;
+            height: 80px;
+            background: var(--icon-bg);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s, background 0.4s ease;
+        }
+
+        .icon-img svg {
+            width: 36px;
+            height: 36px;
+            fill: var(--icon-fill);
+            stroke: none;
+            transition: fill 0.4s ease;
+        }
+
+        .desktop-icon:hover .icon-img {
+            transform: scale(1.06);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .icon-label {
+            color: var(--text-primary);
+            font-size: 13px;
+            font-weight: 500;
+            text-align: center;
+            letter-spacing: -0.01em;
+            transition: color 0.4s ease;
+        }
+
+        /* ── App Window (fullscreen in desktop) ── */
+        .app-window {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: var(--elevated);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            visibility: hidden;
+            opacity: 0;
+            transition: background 0.4s ease;
+        }
+
+        .app-header {
+            height: 52px;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            flex-shrink: 0;
+            transition: background 0.4s ease, border-color 0.4s ease;
+        }
+
+        .traffic-lights {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            transition: opacity 0.12s;
+        }
+
+        .dot-close {
+            background: #ff5f56;
+            cursor: pointer;
+        }
+
+        .dot-close:hover { opacity: 0.8; }
+        .dot-min { background: #ffbd2e; }
+        .dot-max { background: #27c93f; }
+
+        .app-title {
+            flex: 1;
+            text-align: center;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            letter-spacing: -0.01em;
+            transition: color 0.4s ease;
+        }
+
+        .app-title-spacer { width: 60px; }
+
+        .app-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 44px 52px;
+            color: var(--text-secondary);
+            transition: color 0.4s ease;
+        }
+
+        .app-body::-webkit-scrollbar { width: 5px; }
+        .app-body::-webkit-scrollbar-track { background: transparent; }
+        .app-body::-webkit-scrollbar-thumb { background: var(--scrollbar); border-radius: 3px; }
+
+        /* ── Content Typography ── */
+        .app-body h1 {
+            font-size: 34px;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.03em;
+            margin-bottom: 8px;
+            transition: color 0.4s ease;
+        }
+
+        .app-body .subtitle {
+            font-size: 17px;
+            color: var(--text-tertiary);
+            font-weight: 400;
+            margin-bottom: 40px;
+            line-height: 1.5;
+            transition: color 0.4s ease;
+        }
+
+        .app-body h2 {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin: 36px 0 16px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+            transition: color 0.4s ease, border-color 0.4s ease;
+        }
+
+        .app-body h2:first-of-type { margin-top: 0; }
+
+        .app-body h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 24px 0 10px;
+            transition: color 0.4s ease;
+        }
+
+        .app-body p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 14px;
+            transition: color 0.4s ease;
+        }
+
+        .app-body strong { color: var(--text-primary); transition: color 0.4s ease; }
+
+        .app-body hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 32px 0;
+        }
+
+        .app-body ul, .app-body ol {
+            margin: 12px 0;
+            padding-left: 24px;
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+
+        .app-body li { margin: 6px 0; line-height: 1.6; }
+
+        .app-body code {
+            background: var(--code-bg);
+            padding: 2px 7px;
+            border-radius: 4px;
+            font-size: 14px;
+            color: var(--code-color);
+            transition: background 0.4s ease, color 0.4s ease;
+        }
+
+        .app-body pre {
+            background: var(--pre-bg);
+            color: #f0f0f0;
+            padding: 18px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 16px 0;
+            font-size: 14px;
+            transition: background 0.4s ease;
+        }
+
+        .app-body pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+        }
+
+        .app-body a {
+            color: var(--link-color);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-color: var(--link-underline);
+            transition: text-decoration-color 0.12s, color 0.4s ease;
+        }
+
+        .app-body a:hover { text-decoration-color: var(--link-underline-hover); }
+
+        .app-body blockquote {
+            border-left: 3px solid var(--blockquote-border);
+            padding-left: 18px;
+            margin: 16px 0;
+            color: var(--blockquote-color);
+            font-style: italic;
+        }
+
+        .app-body img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin: 16px 0;
+        }
+
+        /* ── Tags ── */
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .tag {
+            padding: 6px 14px;
+            background: var(--surface);
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+        }
+
+        /* ── Project List ── */
+        .project-item {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 18px 20px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .project-item:hover {
+            background: var(--surface-hover);
+            border-color: var(--border-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--icon-bg);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-sm);
+            flex-shrink: 0;
+            transition: background 0.4s ease;
+        }
+
+        .project-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: var(--icon-fill);
+            stroke: none;
+            transition: fill 0.4s ease;
+        }
+
+        .project-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+            transition: color 0.4s ease;
+        }
+
+        .project-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            transition: color 0.4s ease;
+        }
+
+        .project-arrow {
+            margin-left: auto;
+            color: var(--text-muted);
+            font-size: 20px;
+            transition: transform 0.15s, color 0.15s;
+        }
+
+        .project-item:hover .project-arrow {
+            transform: translateX(3px);
+            color: var(--text-tertiary);
+        }
+
+        /* ── Contact Cards ── */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .contact-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 22px;
+            transition: all 0.15s;
+        }
+
+        .contact-card:hover {
+            background: var(--surface-hover);
+            border-color: var(--border-hover);
+        }
+
+        .contact-card-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--surface-hover);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 14px;
+            transition: background 0.4s ease;
+        }
+
+        .contact-card-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--icon-fill);
+            stroke: none;
+            transition: fill 0.4s ease;
+        }
+
+        .contact-card-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 4px;
+            transition: color 0.4s ease;
+        }
+
+        .contact-card-value {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+            transition: color 0.4s ease;
+        }
+
+        /* ── Back Button ── */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            cursor: pointer;
+            margin-bottom: 28px;
+            padding: 6px 12px;
+            border-radius: 8px;
+            transition: all 0.12s;
+        }
+
+        .back-btn:hover { color: var(--text-primary); background: var(--hover-overlay); }
+
+        /* ── Dock ── */
+        .dock {
+            position: absolute;
+            bottom: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--glass-dock);
+            backdrop-filter: blur(30px) saturate(180%);
+            -webkit-backdrop-filter: blur(30px) saturate(180%);
+            padding: 12px 14px;
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: var(--shadow-lg);
+            z-index: 50;
+            transition: background 0.4s ease;
+        }
+
+        .dock-item {
+            width: 68px;
+            height: 68px;
+            background: var(--icon-bg);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                        margin 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                        box-shadow 0.2s,
+                        background 0.4s ease;
+        }
+
+        .dock-item svg {
+            width: 30px;
+            height: 30px;
+            fill: var(--icon-fill);
+            stroke: none;
+            transition: fill 0.4s ease;
+        }
+
+        .dock-item:hover {
+            transform: translateY(-12px) scale(1.15);
+            margin: 0 8px;
+            box-shadow: var(--shadow-hover);
+        }
+
+        .dock-sep {
+            width: 1px;
+            height: 36px;
+            background: var(--border);
+            margin: 0 6px;
+            align-self: center;
+            transition: background 0.4s ease;
+        }
+
+        /* ── Settings ── */
+        .settings-section {
+            margin-bottom: 32px;
+        }
+
+        .settings-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .settings-row:last-child { border-bottom: none; }
+
+        .settings-label {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .settings-desc {
+            font-size: 13px;
+            color: var(--text-tertiary);
+            margin-top: 2px;
+        }
+
+        .toggle {
+            position: relative;
+            width: 44px;
+            height: 26px;
+            border-radius: 13px;
+            background: var(--text-muted);
+            cursor: pointer;
+            transition: background 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .toggle.active {
+            background: #fff;
+        }
+
+        [data-theme="light"] .toggle.active {
+            background: #111;
+        }
+
+        .toggle-knob {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--bg);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease;
+        }
+
+        .toggle.active .toggle-knob {
+            transform: translateX(18px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu Bar -->
+    <div class="menu-bar" id="menu-bar">
+        <span class="menu-brand">Makram Boukaiz</span>
+        <span class="menu-item">File</span>
+        <span class="menu-item">Edit</span>
+        <span class="menu-item">View</span>
+        <div class="menu-right">
+            <span class="menu-time" id="menu-time">12:00 PM</span>
+            <div class="menu-close" id="os-close">✕</div>
+        </div>
+    </div>
+
+    <!-- Desktop -->
+    <div class="desktop" id="desktop">
+        <video class="desktop-bg" muted playsinline src="assets/animation/Comp.mp4" id="bg-video"></video>
+        <div class="desktop-icons" id="desktop-icons">
+            <div class="desktop-icon" onclick="openApp('about')">
+                <div class="icon-img"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4.5"/><path d="M4 21c0-4.42 3.58-8 8-8s8 3.58 8 8H4z"/></svg></div>
+                <div class="icon-label">About Me</div>
+            </div>
+            <div class="desktop-icon" onclick="openApp('projects')">
+                <div class="icon-img"><svg viewBox="0 0 24 24"><path d="M2 6a2 2 0 012-2h5l2 2h9a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"/></svg></div>
+                <div class="icon-label">Projects</div>
+            </div>
+            <div class="desktop-icon" onclick="openApp('contact')">
+                <div class="icon-img"><svg viewBox="0 0 24 24"><path d="M2 6a2 2 0 012-2h16a2 2 0 012 2l-10 7L2 6zm0 1.5V18a2 2 0 002 2h16a2 2 0 002-2V7.5l-10 7-10-7z"/></svg></div>
+                <div class="icon-label">Contact</div>
+            </div>
+        </div>
+
+        <!-- App Window -->
+        <div class="app-window" id="app-window">
+            <div class="app-header">
+                <div class="traffic-lights">
+                    <div class="dot dot-close" id="app-close"></div>
+                    <div class="dot dot-min"></div>
+                    <div class="dot dot-max"></div>
+                </div>
+                <div class="app-title" id="app-title">Window</div>
+                <div class="app-title-spacer"></div>
+            </div>
+            <div class="app-body" id="app-body"></div>
+        </div>
+    </div>
+
+    <!-- Dock -->
+    <div class="dock" id="dock">
+        <div class="dock-item" onclick="openApp('about')"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4.5"/><path d="M4 21c0-4.42 3.58-8 8-8s8 3.58 8 8H4z"/></svg></div>
+        <div class="dock-item" onclick="openApp('projects')"><svg viewBox="0 0 24 24"><path d="M2 6a2 2 0 012-2h5l2 2h9a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"/></svg></div>
+        <div class="dock-item" onclick="openApp('contact')"><svg viewBox="0 0 24 24"><path d="M2 6a2 2 0 012-2h16a2 2 0 012 2l-10 7L2 6zm0 1.5V18a2 2 0 002 2h16a2 2 0 002-2V7.5l-10 7-10-7z"/></svg></div>
+        <div class="dock-sep"></div>
+        <div class="dock-item" onclick="openApp('settings')"><svg viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 1112 8.5a3.5 3.5 0 010 7zm7.43-2.53c.04-.32.07-.64.07-.97s-.03-.66-.07-.97l2.11-1.65a.5.5 0 00.12-.64l-2-3.46a.5.5 0 00-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65A.49.49 0 0014 2h-4a.49.49 0 00-.49.42l-.38 2.65c-.61.25-1.17.58-1.69.98l-2.49-1a.5.5 0 00-.61.22l-2 3.46a.49.49 0 00.12.64l2.11 1.65c-.04.32-.07.64-.07.97s.03.66.07.97l-2.11 1.65a.5.5 0 00-.12.64l2 3.46a.5.5 0 00.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.05.24.26.42.49.42h4c.24 0 .44-.18.49-.42l.38-2.65c.61-.25 1.17-.58 1.69-.98l2.49 1a.5.5 0 00.61-.22l2-3.46a.49.49 0 00-.12-.64l-2.11-1.65z"/></svg></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
+    <script>
+        const appWindow = document.getElementById('app-window');
+        const appTitle = document.getElementById('app-title');
+        const appBody = document.getElementById('app-body');
+
+        const projects = [
+            { name: 'Enprico', url: 'https://enprico.com', svg: '<svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>', desc: 'Co-founded platform — Next.js, Supabase, GSAP' },
+            { name: 'Amanatick', url: 'https://amanatick.com', svg: '<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>', desc: 'Website built with Next.js, Three.js, GSAP' },
+            { name: 'TailorResumeAI', url: 'https://tailoresumeai.com', svg: '<svg viewBox="0 0 24 24"><path d="M6 2a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V4a2 2 0 00-2-2H6zm1 4h10v2H7V6zm0 4h10v2H7v-2zm0 4h6v2H7v-2z"/></svg>', desc: 'AI-powered SaaS resume builder' },
+            { name: 'TaskMaverick', url: 'https://taskmaverick.com', svg: '<svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>', desc: 'Productivity tool built at OMC, Inc.' },
+            { name: 'Atlas Secret', url: 'https://atlassecret.com', svg: '<svg viewBox="0 0 24 24"><path d="M12 2L2 19h20L12 2zm0 4l7 13H5l7-13z"/></svg>', desc: '3D branding, website & motion design' }
+        ];
+
+        // ── Close OS ──
+        document.getElementById('os-close').addEventListener('click', () => {
+            window.parent.postMessage('closeOS', '*');
+        });
+
+        // ── Close App Window ──
+        document.getElementById('app-close').addEventListener('click', closeApp);
+
+        function closeApp() {
+            gsap.to(appWindow, {
+                opacity: 0, scale: 0.97, duration: 0.25, ease: 'power2.in',
+                onComplete: () => {
+                    appWindow.style.visibility = 'hidden';
+                    gsap.set(appWindow, { scale: 1 });
+                }
+            });
+        }
+
+        // ── Open App ──
+        function openApp(page, data) {
+            const titles = { about: 'About Me', projects: 'Projects', contact: 'Contact', settings: 'Settings', 'project-detail': data?.name || 'Project' };
+            appTitle.textContent = titles[page] || page;
+
+            const renderers = { about: renderAbout, projects: renderProjects, contact: renderContact, settings: renderSettings, 'project-detail': () => renderProjectDetail(data) };
+            (renderers[page] || renderAbout)();
+
+            appWindow.style.visibility = 'visible';
+            gsap.fromTo(appWindow,
+                { opacity: 0, scale: 0.95 },
+                { opacity: 1, scale: 1, duration: 0.35, ease: 'power3.out' }
+            );
+
+            // Stagger content
+            requestAnimationFrame(() => {
+                const els = appBody.querySelectorAll('h1, h2, h3, p, .tags, .project-item, .contact-card, .back-btn, .subtitle');
+                gsap.fromTo(els,
+                    { opacity: 0, y: 12 },
+                    { opacity: 1, y: 0, duration: 0.4, stagger: 0.04, ease: 'power3.out', delay: 0.1 }
+                );
+            });
+        }
+
+        // ── About ──
+        function renderAbout() {
+            appBody.innerHTML = `
+                <h1>Hi, I'm Makram.</h1>
+                <p class="subtitle">UI/UX and motion design specialist crafting intuitive, user-focused digital interfaces where design, code, and motion collide.</p>
+
+                <h2>Background</h2>
+                <p>I design clean wireframes, interactive prototypes, and smooth UI animations that enhance user experience. With a background in front-end development and visual design, I collaborate with cross-functional teams and adapt designs based on user feedback and technical constraints.</p>
+                <p>Currently <strong>Lead UI Motion Designer</strong> at <strong>OMC, Inc.</strong>, co-founding <strong>Enprico</strong>, and leading 3D at <strong>Atlas Secret</strong>.</p>
+
+                <h2>Experience</h2>
+                <p><strong>OMC, Inc.</strong> — Lead UI Motion Designer & Creative Technologist</p>
+                <p>Leading the motion design department, designing UI animations, Lotties, 3D visuals, and building taskmaverick.com end-to-end.</p>
+                <p><strong>Atlas Secret</strong> — Lead 3D Artist</p>
+                <p>Creating 3D ads, designing website interfaces, and building the Atlas Secret website from scratch.</p>
+                <p><strong>Enprico</strong> — Founder</p>
+                <p>Full-stack development from sign-up flow to dashboard. UI/UX design, motion graphics, and promotional content.</p>
+
+                <h2>Motion & UI Design</h2>
+                <p>Designing animated interfaces with production code. Micro-interactions, transitions, Lotties, and motion systems.</p>
+                <div class="tags">
+                    <span class="tag">After Effects</span><span class="tag">Lottie</span><span class="tag">Figma</span>
+                    <span class="tag">GSAP</span><span class="tag">Rive</span><span class="tag">Premiere Pro</span>
+                </div>
+
+                <h2>Development</h2>
+                <p>Full-stack web development with a strong software engineering foundation.</p>
+                <div class="tags">
+                    <span class="tag">Next.js</span><span class="tag">JavaScript</span><span class="tag">Three.js</span>
+                    <span class="tag">GSAP</span><span class="tag">Supabase</span><span class="tag">HTML/CSS</span>
+                    <span class="tag">C/C++</span><span class="tag">C#</span><span class="tag">Unity</span>
+                </div>
+
+                <h2>3D & Visual</h2>
+                <p>Immersive 3D visualizations, motion graphics, and real-time rendering for ads and branding.</p>
+                <div class="tags">
+                    <span class="tag">Blender</span><span class="tag">Three.js</span>
+                    <span class="tag">After Effects</span><span class="tag">WebGL</span>
+                </div>
+
+                <h2>Education</h2>
+                <p><strong>1337 Coding School</strong> — Software Engineer, 2025</p>
+                <p><strong>Institut Specialise de Technologie Appliquee</strong> — Associate in Computer Science, 2022</p>
+            `;
+        }
+
+        // ── Projects ──
+        function renderProjects() {
+            appBody.innerHTML = `
+                <h1>Projects</h1>
+                <p class="subtitle">Selected work and products I've built.</p>
+                ${projects.map(p => `
+                    <div class="project-item" onclick="${p.url ? `window.open('${p.url}', '_blank')` : ''}">
+                        <div class="project-icon">${p.svg}</div>
+                        <div>
+                            <div class="project-name">${p.name}</div>
+                            <div class="project-desc">${p.desc}</div>
+                        </div>
+                        <div class="project-arrow">&rsaquo;</div>
+                    </div>
+                `).join('')}
+            `;
+        }
+
+        // ── Project Detail ──
+        async function renderProjectDetail(data) {
+            if (!data) return;
+            appBody.innerHTML = '<div class="back-btn" onclick="openApp(\'projects\')">&larr; Back</div><p class="subtitle">Loading...</p>';
+            try {
+                const res = await fetch(data.file);
+                const md = await res.text();
+                appBody.innerHTML = `
+                    <div class="back-btn" onclick="openApp('projects')">&larr; Back</div>
+                    ${marked.parse(md)}
+                `;
+                requestAnimationFrame(() => {
+                    const els = appBody.querySelectorAll('h1, h2, h3, p, pre, ul, ol, blockquote, img');
+                    gsap.fromTo(els, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.03, ease: 'power3.out' });
+                });
+            } catch (e) {
+                appBody.innerHTML = '<div class="back-btn" onclick="openApp(\'projects\')">&larr; Back</div><p>Error loading project.</p>';
+            }
+        }
+
+        // ── Contact ──
+        function renderContact() {
+            appBody.innerHTML = `
+                <h1>Get in Touch</h1>
+                <p class="subtitle">Whether you have a project idea, want to collaborate, or just want to say hi.</p>
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <div class="contact-card-icon"><svg viewBox="0 0 24 24"><path d="M2 6a2 2 0 012-2h16a2 2 0 012 2l-10 7L2 6zm0 1.5V18a2 2 0 002 2h16a2 2 0 002-2V7.5l-10 7-10-7z"/></svg></div>
+                        <div class="contact-card-label">Email</div>
+                        <div class="contact-card-value">makramboukaiz@gmail.com</div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-card-icon"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2V9zm2-7a2 2 0 110 4 2 2 0 010-4z"/></svg></div>
+                        <div class="contact-card-label">LinkedIn</div>
+                        <div class="contact-card-value">Makram Boukaiz</div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-card-icon"><svg viewBox="0 0 24 24"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.8-1.3-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.3 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .3z"/></svg></div>
+                        <div class="contact-card-label">GitHub</div>
+                        <div class="contact-card-value">GitHub</div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-card-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 17.93A8 8 0 0112 4a8 8 0 011 15.93V14h-2v5.93zM11 11h2v2h-2v-2zm0-4h2v2h-2V7z"/></svg></div>
+                        <div class="contact-card-label">Location</div>
+                        <div class="contact-card-value">Morocco</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ── Settings ──
+        function renderSettings() {
+            const isDark = !document.documentElement.hasAttribute('data-theme');
+            appBody.innerHTML = `
+                <h1>Settings</h1>
+                <p class="subtitle">Customize your experience.</p>
+
+                <h2>Appearance</h2>
+                <div class="settings-section">
+                    <div class="settings-row">
+                        <div>
+                            <div class="settings-label">Dark Mode</div>
+                            <div class="settings-desc">Switch between light and dark appearance</div>
+                        </div>
+                        <div class="toggle ${isDark ? 'active' : ''}" id="theme-toggle" onclick="toggleTheme()">
+                            <div class="toggle-knob"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const isCurrentlyDark = !html.hasAttribute('data-theme');
+            const toggle = document.getElementById('theme-toggle');
+
+            if (isCurrentlyDark) {
+                html.setAttribute('data-theme', 'light');
+                toggle.classList.remove('active');
+            } else {
+                html.removeAttribute('data-theme');
+                toggle.classList.add('active');
+            }
+
+            try { localStorage.setItem('theme', isCurrentlyDark ? 'light' : 'dark'); } catch(e) {}
+        }
+
+        // ── Restore saved theme (default: dark) ──
+        (function() {
+            try {
+                const saved = localStorage.getItem('theme');
+                if (saved === 'light') {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                }
+            } catch(e) {}
+        })();
+
+        // ── Clock ──
+        function updateClock() {
+            document.getElementById('menu-time').textContent = new Date().toLocaleTimeString('en-US', {
+                hour: 'numeric', minute: '2-digit', hour12: true
+            });
+        }
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        // ── Forward mouse to parent for parallax ──
+        document.addEventListener('mousemove', (e) => {
+            if (window.parent !== window) {
+                const rect = document.documentElement.getBoundingClientRect();
+                window.parent.postMessage({
+                    type: 'mousemove',
+                    clientX: e.clientX,
+                    clientY: e.clientY,
+                    iframeWidth: rect.width,
+                    iframeHeight: rect.height
+                }, '*');
+            }
+        });
+
+        // ── Background Video: play, wait 5s, replay ──
+        const bgVideo = document.getElementById('bg-video');
+        bgVideo.play();
+        bgVideo.addEventListener('ended', () => {
+            setTimeout(() => {
+                bgVideo.currentTime = 0;
+                bgVideo.play();
+            }, 5000);
+        });
+
+        // ── Boot Animation ──
+        gsap.from('.menu-bar', { opacity: 0, y: -20, duration: 0.5, ease: 'power3.out' });
+        gsap.from('.desktop-icon', { opacity: 0, y: 20, scale: 0.9, duration: 0.5, stagger: 0.08, delay: 0.2, ease: 'back.out(1.4)' });
+        gsap.from('.dock', { opacity: 0, y: 30, duration: 0.5, delay: 0.4, ease: 'power3.out' });
+        gsap.from('.dock-item', { opacity: 0, y: 16, scale: 0.9, duration: 0.4, stagger: 0.06, delay: 0.5, ease: 'back.out(1.4)', clearProps: 'transform' });
+    </script>
+</body>
+</html>
