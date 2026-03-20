@@ -422,12 +422,12 @@ function updateCameraInfo() {
 
 // Camera boundary constraints
 const cameraBounds = {
-    minX: -15,
-    maxX: 15,
-    minY: 1,
-    maxY: 15,
-    minZ: -15,
-    maxZ: 15,
+    minX: -12,
+    maxX: 2,
+    minY: 0.9,
+    maxY: 7,
+    minZ: 0,
+    maxZ: 14,
     softZone: 2  // Soft boundary zone for smooth easing
 };
 

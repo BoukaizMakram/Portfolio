@@ -96,14 +96,14 @@
             background: var(--glass-bg);
             backdrop-filter: blur(30px);
             -webkit-backdrop-filter: blur(30px);
-            padding: 0 32px;
-            height: 56px;
+            padding: 0 40px;
+            height: 72px;
             width: 100%;
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 24px;
             border-bottom: 1px solid var(--glass-border);
-            font-size: 16px;
+            font-size: 22px;
             color: var(--text-secondary);
             flex-shrink: 0;
             z-index: 100;
@@ -112,7 +112,7 @@
 
         .menu-brand {
             font-weight: 700;
-            font-size: 17px;
+            font-size: 23px;
             color: var(--text-primary);
             letter-spacing: -0.02em;
             transition: color 0.4s ease;
@@ -120,9 +120,9 @@
 
         .menu-item {
             cursor: pointer;
-            padding: 4px 12px;
+            padding: 6px 14px;
             border-radius: 5px;
-            font-size: 15px;
+            font-size: 21px;
             font-weight: 450;
             color: var(--text-secondary);
             transition: background 0.12s, color 0.4s ease;
@@ -138,7 +138,7 @@
         }
 
         .menu-time {
-            font-size: 15px;
+            font-size: 21px;
             color: var(--text-secondary);
             font-weight: 450;
             font-variant-numeric: tabular-nums;
@@ -146,14 +146,14 @@
         }
 
         .menu-close {
-            width: 28px;
-            height: 28px;
+            width: 36px;
+            height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 6px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 22px;
             color: var(--text-muted);
             transition: all 0.12s;
         }
@@ -179,6 +179,11 @@
             object-fit: cover;
             z-index: 0;
             pointer-events: none;
+            transition: filter 0.4s ease;
+        }
+
+        [data-theme="light"] .desktop-bg {
+            filter: invert(1) grayscale(1) brightness(1.1);
         }
 
         /* ── Desktop Icons ── */
@@ -239,7 +244,7 @@
 
         .icon-label {
             color: var(--text-primary);
-            font-size: 13px;
+            font-size: 17px;
             font-weight: 500;
             text-align: center;
             letter-spacing: -0.01em;
@@ -260,12 +265,12 @@
         }
 
         .app-header {
-            height: 52px;
+            height: 68px;
             background: var(--surface);
             border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
-            padding: 0 20px;
+            padding: 0 28px;
             flex-shrink: 0;
             transition: background 0.4s ease, border-color 0.4s ease;
         }
@@ -277,8 +282,8 @@
         }
 
         .dot {
-            width: 14px;
-            height: 14px;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
             transition: opacity 0.12s;
         }
@@ -295,7 +300,7 @@
         .app-title {
             flex: 1;
             text-align: center;
-            font-size: 15px;
+            font-size: 21px;
             font-weight: 600;
             color: var(--text-secondary);
             letter-spacing: -0.01em;
@@ -307,7 +312,7 @@
         .app-body {
             flex: 1;
             overflow-y: auto;
-            padding: 44px 52px;
+            padding: 52px 64px;
             color: var(--text-secondary);
             transition: color 0.4s ease;
         }
@@ -318,31 +323,31 @@
 
         /* ── Content Typography ── */
         .app-body h1 {
-            font-size: 34px;
+            font-size: 46px;
             font-weight: 700;
             color: var(--text-primary);
             letter-spacing: -0.03em;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             transition: color 0.4s ease;
         }
 
         .app-body .subtitle {
-            font-size: 17px;
+            font-size: 23px;
             color: var(--text-tertiary);
             font-weight: 400;
-            margin-bottom: 40px;
+            margin-bottom: 44px;
             line-height: 1.5;
             transition: color 0.4s ease;
         }
 
         .app-body h2 {
-            font-size: 12px;
+            font-size: 16px;
             font-weight: 600;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.08em;
-            margin: 36px 0 16px;
-            padding-bottom: 10px;
+            margin: 40px 0 18px;
+            padding-bottom: 12px;
             border-bottom: 1px solid var(--border);
             transition: color 0.4s ease, border-color 0.4s ease;
         }
@@ -350,18 +355,18 @@
         .app-body h2:first-of-type { margin-top: 0; }
 
         .app-body h3 {
-            font-size: 18px;
+            font-size: 24px;
             font-weight: 600;
             color: var(--text-primary);
-            margin: 24px 0 10px;
+            margin: 28px 0 12px;
             transition: color 0.4s ease;
         }
 
         .app-body p {
-            font-size: 16px;
+            font-size: 22px;
             line-height: 1.7;
             color: var(--text-secondary);
-            margin-bottom: 14px;
+            margin-bottom: 16px;
             transition: color 0.4s ease;
         }
 
@@ -374,19 +379,19 @@
         }
 
         .app-body ul, .app-body ol {
-            margin: 12px 0;
-            padding-left: 24px;
-            font-size: 16px;
+            margin: 14px 0;
+            padding-left: 28px;
+            font-size: 22px;
             color: var(--text-secondary);
         }
 
-        .app-body li { margin: 6px 0; line-height: 1.6; }
+        .app-body li { margin: 8px 0; line-height: 1.6; }
 
         .app-body code {
             background: var(--code-bg);
-            padding: 2px 7px;
+            padding: 3px 8px;
             border-radius: 4px;
-            font-size: 14px;
+            font-size: 19px;
             color: var(--code-color);
             transition: background 0.4s ease, color 0.4s ease;
         }
@@ -394,11 +399,11 @@
         .app-body pre {
             background: var(--pre-bg);
             color: #f0f0f0;
-            padding: 18px;
+            padding: 22px;
             border-radius: 10px;
             overflow-x: auto;
-            margin: 16px 0;
-            font-size: 14px;
+            margin: 18px 0;
+            font-size: 19px;
             transition: background 0.4s ease;
         }
 
@@ -441,10 +446,10 @@
         }
 
         .tag {
-            padding: 6px 14px;
+            padding: 8px 18px;
             background: var(--surface);
             border-radius: 20px;
-            font-size: 13px;
+            font-size: 18px;
             font-weight: 500;
             color: var(--text-secondary);
             border: 1px solid var(--border);
@@ -494,15 +499,15 @@
         }
 
         .project-name {
-            font-size: 16px;
+            font-size: 22px;
             font-weight: 600;
             color: var(--text-primary);
-            margin-bottom: 2px;
+            margin-bottom: 3px;
             transition: color 0.4s ease;
         }
 
         .project-desc {
-            font-size: 13px;
+            font-size: 18px;
             color: var(--text-muted);
             transition: color 0.4s ease;
         }
@@ -510,7 +515,7 @@
         .project-arrow {
             margin-left: auto;
             color: var(--text-muted);
-            font-size: 20px;
+            font-size: 26px;
             transition: transform 0.15s, color 0.15s;
         }
 
@@ -561,7 +566,7 @@
         }
 
         .contact-card-label {
-            font-size: 11px;
+            font-size: 15px;
             font-weight: 600;
             color: var(--text-muted);
             text-transform: uppercase;
@@ -571,18 +576,72 @@
         }
 
         .contact-card-value {
-            font-size: 15px;
+            font-size: 20px;
             font-weight: 600;
             color: var(--text-primary);
             transition: color 0.4s ease;
+        }
+
+        /* ── Contact Form ── */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px 20px;
+            font-size: 20px;
+            font-family: inherit;
+            color: var(--text-primary);
+            outline: none;
+            transition: border-color 0.15s, background 0.4s ease, color 0.4s ease;
+            resize: none;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--border-hover);
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .cf-submit {
+            align-self: flex-start;
+            padding: 14px 32px;
+            background: var(--text-primary);
+            color: var(--bg);
+            border: none;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: opacity 0.15s, background 0.4s ease, color 0.4s ease;
+        }
+
+        .cf-submit:hover {
+            opacity: 0.85;
+        }
+
+        .contact-card {
+            cursor: pointer;
         }
 
         /* ── Back Button ── */
         .back-btn {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            font-size: 14px;
+            gap: 8px;
+            font-size: 19px;
             font-weight: 500;
             color: var(--text-muted);
             cursor: pointer;
@@ -668,15 +727,15 @@
         .settings-row:last-child { border-bottom: none; }
 
         .settings-label {
-            font-size: 15px;
+            font-size: 21px;
             font-weight: 500;
             color: var(--text-primary);
         }
 
         .settings-desc {
-            font-size: 13px;
+            font-size: 18px;
             color: var(--text-tertiary);
-            margin-top: 2px;
+            margin-top: 3px;
         }
 
         .toggle {
@@ -712,19 +771,72 @@
         .toggle.active .toggle-knob {
             transform: translateX(18px);
         }
+
+        /* ── Floating Zoom ── */
+        .floating-zoom {
+            position: fixed;
+            top: 84px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            z-index: 10000;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            padding: 6px 8px;
+            box-shadow: var(--shadow-md);
+            transition: background 0.4s ease, border-color 0.4s ease;
+        }
+
+        .zoom-btn {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            user-select: none;
+            transition: background 0.12s, color 0.4s ease, border-color 0.4s ease;
+        }
+
+        .zoom-btn:hover {
+            background: var(--surface-hover);
+        }
+
+        .zoom-val {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            min-width: 38px;
+            text-align: center;
+            transition: color 0.4s ease;
+        }
     </style>
 </head>
 <body>
     <!-- Menu Bar -->
     <div class="menu-bar" id="menu-bar">
         <span class="menu-brand">Makram Boukaiz</span>
-        <span class="menu-item">File</span>
-        <span class="menu-item">Edit</span>
-        <span class="menu-item">View</span>
         <div class="menu-right">
             <span class="menu-time" id="menu-time">12:00 PM</span>
             <div class="menu-close" id="os-close">✕</div>
         </div>
+    </div>
+
+    <!-- Floating Zoom (hidden by default, shown when app window is open) -->
+    <div class="floating-zoom" id="floating-zoom" style="display:none;">
+        <div class="zoom-btn" id="zoom-out">−</div>
+        <span class="zoom-val" id="zoom-val">100%</span>
+        <div class="zoom-btn" id="zoom-in">+</div>
     </div>
 
     <!-- Desktop -->
@@ -792,6 +904,7 @@
         document.getElementById('app-close').addEventListener('click', closeApp);
 
         function closeApp() {
+            document.getElementById('floating-zoom').style.display = 'none';
             gsap.to(appWindow, {
                 opacity: 0, scale: 0.97, duration: 0.25, ease: 'power2.in',
                 onComplete: () => {
@@ -803,13 +916,14 @@
 
         // ── Open App ──
         function openApp(page, data) {
-            const titles = { about: 'About Me', projects: 'Projects', contact: 'Contact', settings: 'Settings', 'project-detail': data?.name || 'Project' };
+            const titles = { about: 'About Me', projects: 'Projects', contact: 'Contact', settings: 'Settings', windy: 'Windy', 'project-detail': data?.name || 'Project' };
             appTitle.textContent = titles[page] || page;
 
-            const renderers = { about: renderAbout, projects: renderProjects, contact: renderContact, settings: renderSettings, 'project-detail': () => renderProjectDetail(data) };
+            const renderers = { about: renderAbout, projects: renderProjects, contact: renderContact, settings: renderSettings, windy: renderWindy, 'project-detail': () => renderProjectDetail(data) };
             (renderers[page] || renderAbout)();
 
             appWindow.style.visibility = 'visible';
+            document.getElementById('floating-zoom').style.display = 'flex';
             gsap.fromTo(appWindow,
                 { opacity: 0, scale: 0.95 },
                 { opacity: 1, scale: 1, duration: 0.35, ease: 'power3.out' }
@@ -843,6 +957,23 @@
                 <p><strong>Enprico</strong> — Founder</p>
                 <p>Full-stack development from sign-up flow to dashboard. UI/UX design, motion graphics, and promotional content.</p>
 
+                <h2>Scroll-Driven Animation & Motion Engineering</h2>
+                <p>I take static designs and make them move — scroll-triggered section reveals, staggered entrance animations, parallax effects, and layout transitions. All hand-coded with <strong>Framer Motion</strong> and <strong>GSAP</strong> in production React codebases. No AOS, no preset libraries.</p>
+                <p>Comfortable working with spring physics, <code>useScroll</code> / <code>useTransform</code>, <code>AnimatePresence</code>, layout animations, and variants. Performance-first — every animation targets <strong>60fps</strong> across desktop and mobile.</p>
+                <div class="tags">
+                    <span class="tag">Framer Motion</span><span class="tag">GSAP</span><span class="tag">useScroll</span>
+                    <span class="tag">useTransform</span><span class="tag">AnimatePresence</span><span class="tag">Spring Physics</span>
+                    <span class="tag">Layout Animations</span><span class="tag">Variants</span>
+                </div>
+
+                <h2>Motion Graphics & Video</h2>
+                <p>Beyond code — I design and produce motion graphics, animated ads, product videos, and brand content. From concept and storyboarding to final render and delivery.</p>
+                <p>See my motion work on <a href="https://behance.net/makramboukaiz1" target="_blank">Behance</a>.</p>
+                <div class="tags">
+                    <span class="tag">After Effects</span><span class="tag">Premiere Pro</span><span class="tag">Blender</span>
+                    <span class="tag">Lottie</span><span class="tag">Rive</span><span class="tag">Cinema 4D</span>
+                </div>
+
                 <h2>Motion & UI Design</h2>
                 <p>Designing animated interfaces with production code. Micro-interactions, transitions, Lotties, and motion systems.</p>
                 <div class="tags">
@@ -853,7 +984,8 @@
                 <h2>Development</h2>
                 <p>Full-stack web development with a strong software engineering foundation.</p>
                 <div class="tags">
-                    <span class="tag">Next.js</span><span class="tag">JavaScript</span><span class="tag">Three.js</span>
+                    <span class="tag">React</span><span class="tag">Next.js 14+</span><span class="tag">TypeScript</span>
+                    <span class="tag">Tailwind CSS</span><span class="tag">JavaScript</span><span class="tag">Three.js</span>
                     <span class="tag">GSAP</span><span class="tag">Supabase</span><span class="tag">HTML/CSS</span>
                     <span class="tag">C/C++</span><span class="tag">C#</span><span class="tag">Unity</span>
                 </div>
@@ -915,28 +1047,51 @@
                 <h1>Get in Touch</h1>
                 <p class="subtitle">Whether you have a project idea, want to collaborate, or just want to say hi.</p>
                 <div class="contact-grid">
-                    <div class="contact-card">
+                    <a class="contact-card" href="mailto:makramboukaiz@gmail.com" style="text-decoration:none;">
                         <div class="contact-card-icon"><svg viewBox="0 0 24 24"><path d="M2 6a2 2 0 012-2h16a2 2 0 012 2l-10 7L2 6zm0 1.5V18a2 2 0 002 2h16a2 2 0 002-2V7.5l-10 7-10-7z"/></svg></div>
                         <div class="contact-card-label">Email</div>
                         <div class="contact-card-value">makramboukaiz@gmail.com</div>
-                    </div>
-                    <div class="contact-card">
+                    </a>
+                    <a class="contact-card" href="https://www.linkedin.com/in/boukaiz-makram/" target="_blank" style="text-decoration:none;">
                         <div class="contact-card-icon"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2V9zm2-7a2 2 0 110 4 2 2 0 010-4z"/></svg></div>
                         <div class="contact-card-label">LinkedIn</div>
                         <div class="contact-card-value">Makram Boukaiz</div>
-                    </div>
-                    <div class="contact-card">
+                    </a>
+                    <a class="contact-card" href="https://github.com/BoukaizMakram" target="_blank" style="text-decoration:none;">
                         <div class="contact-card-icon"><svg viewBox="0 0 24 24"><path d="M12 .3a12 12 0 00-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.8-1.3-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 016 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.3 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0012 .3z"/></svg></div>
                         <div class="contact-card-label">GitHub</div>
-                        <div class="contact-card-value">GitHub</div>
-                    </div>
-                    <div class="contact-card">
-                        <div class="contact-card-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 17.93A8 8 0 0112 4a8 8 0 011 15.93V14h-2v5.93zM11 11h2v2h-2v-2zm0-4h2v2h-2V7z"/></svg></div>
-                        <div class="contact-card-label">Location</div>
-                        <div class="contact-card-value">Morocco</div>
-                    </div>
+                        <div class="contact-card-value">BoukaizMakram</div>
+                    </a>
+                    <a class="contact-card" href="https://behance.net/makramboukaiz1" target="_blank" style="text-decoration:none;">
+                        <div class="contact-card-icon"><svg viewBox="0 0 24 24"><path d="M22 7h-7V5h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14H15.97c.13 3.211 3.483 3.312 4.588 2.029h3.168zm-7.686-4h4.965c-.105-1.547-1.136-2.219-2.477-2.219-1.466 0-2.277.768-2.488 2.219zm-9.574 6.988H0V5.021h6.953c5.476.081 5.58 5.444 2.72 6.906 3.461 1.26 3.577 8.061-3.207 8.061zM3 11h3.584c2.508 0 2.906-3-.312-3H3v3zm3.391 3H3v3.016h3.341c3.055 0 2.868-3.016.05-3.016z"/></svg></div>
+                        <div class="contact-card-label">Behance</div>
+                        <div class="contact-card-value">Motion Portfolio</div>
+                    </a>
                 </div>
+
+                <h2>Send me a message</h2>
+                <form class="contact-form" id="contact-form">
+                    <input type="text" id="cf-name" placeholder="Your name" required>
+                    <input type="email" id="cf-email" placeholder="Your email" required>
+                    <input type="text" id="cf-subject" placeholder="Subject" required>
+                    <textarea id="cf-message" placeholder="Tell me about your project or idea..." rows="5" required></textarea>
+                    <button type="submit" class="cf-submit" id="cf-submit">Send Message</button>
+                </form>
             `;
+
+            document.getElementById('contact-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('cf-name').value;
+                const email = document.getElementById('cf-email').value;
+                const subject = document.getElementById('cf-subject').value;
+                const message = document.getElementById('cf-message').value;
+                const body = 'Hi Makram,%0D%0A%0D%0A' + encodeURIComponent(message) + '%0D%0A%0D%0A— ' + encodeURIComponent(name) + ' (' + encodeURIComponent(email) + ')';
+                window.open('mailto:contact@makramboukaiz.com?subject=' + encodeURIComponent(subject) + '&body=' + body, '_self');
+                const btn = document.getElementById('cf-submit');
+                btn.textContent = 'Opening mail client...';
+                btn.style.opacity = '0.6';
+                setTimeout(() => { btn.textContent = 'Send Message'; btn.style.opacity = '1'; }, 3000);
+            });
         }
 
         // ── Settings ──
@@ -955,6 +1110,21 @@
                         </div>
                         <div class="toggle ${isDark ? 'active' : ''}" id="theme-toggle" onclick="toggleTheme()">
                             <div class="toggle-knob"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>Zoom</h2>
+                <div class="settings-section">
+                    <div class="settings-row">
+                        <div>
+                            <div class="settings-label">Interface Zoom</div>
+                            <div class="settings-desc">Adjust the size of the interface</div>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:10px;">
+                            <div class="zoom-btn" onclick="settingsZoom(-10)" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:var(--surface);border:1px solid var(--border);border-radius:7px;cursor:pointer;font-size:18px;font-weight:600;color:var(--text-primary);user-select:none;">−</div>
+                            <span id="settings-zoom-val" style="font-size:18px;font-weight:600;color:var(--text-secondary);min-width:38px;text-align:center;">${Math.round(parseFloat(document.documentElement.style.zoom || 1) * 100)}%</span>
+                            <div class="zoom-btn" onclick="settingsZoom(10)" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:var(--surface);border:1px solid var(--border);border-radius:7px;cursor:pointer;font-size:18px;font-weight:600;color:var(--text-primary);user-select:none;">+</div>
                         </div>
                     </div>
                 </div>
@@ -977,6 +1147,16 @@
             try { localStorage.setItem('theme', isCurrentlyDark ? 'light' : 'dark'); } catch(e) {}
         }
 
+        function settingsZoom(delta) {
+            const cur = Math.round(parseFloat(document.documentElement.style.zoom || 1) * 100);
+            const val = Math.max(70, Math.min(150, cur + delta));
+            document.documentElement.style.zoom = val / 100;
+            try { localStorage.setItem('os-zoom', val); } catch(ex) {}
+            const el = document.getElementById('settings-zoom-val');
+            if (el) el.textContent = val + '%';
+            document.getElementById('zoom-val').textContent = val + '%';
+        }
+
         // ── Restore saved theme (default: dark) ──
         (function() {
             try {
@@ -984,7 +1164,34 @@
                 if (saved === 'light') {
                     document.documentElement.setAttribute('data-theme', 'light');
                 }
+                const zoom = localStorage.getItem('os-zoom');
+                if (zoom) {
+                    document.documentElement.style.zoom = zoom / 100;
+                }
             } catch(e) {}
+        })();
+
+        // ── Floating Zoom ──
+        (function() {
+            function updateZoomDisplay() {
+                const val = Math.round(parseFloat(document.documentElement.style.zoom || 1) * 100);
+                document.getElementById('zoom-val').textContent = val + '%';
+            }
+            function setZoom(val) {
+                val = Math.max(70, Math.min(150, val));
+                document.documentElement.style.zoom = val / 100;
+                updateZoomDisplay();
+                try { localStorage.setItem('os-zoom', val); } catch(ex) {}
+            }
+            document.getElementById('zoom-in').addEventListener('click', function() {
+                const cur = Math.round(parseFloat(document.documentElement.style.zoom || 1) * 100);
+                setZoom(cur + 10);
+            });
+            document.getElementById('zoom-out').addEventListener('click', function() {
+                const cur = Math.round(parseFloat(document.documentElement.style.zoom || 1) * 100);
+                setZoom(cur - 10);
+            });
+            updateZoomDisplay();
         })();
 
         // ── Clock ──
@@ -1019,6 +1226,43 @@
                 bgVideo.play();
             }, 5000);
         });
+
+        // ── Windy (easter egg) ──
+        function renderWindy() {
+            appBody.innerHTML = `
+                <h1>Windy</h1>
+                <p class="subtitle">My wife, my best friend, my everything.</p>
+
+                <h2>Her Vibe</h2>
+                <p>Windy is one of those rare people that everyone wants to be around. The kind of person you meet once and immediately feel like you've known forever. She lights up a room without even trying. Anyone who knows her would tell you the same thing: she's the best friend you could ever ask for.</p>
+                <p>She was my best friend before she was my partner, and honestly that's what makes everything between us so real. She gets me in ways nobody else does.</p>
+
+                <h2>The Real Her</h2>
+                <p>Yes, she gets angry sometimes. She can be intense. But that's just the surface. Underneath all of that is the most fragile, beautiful, clean heart you'll ever find. She cares so deeply that it overflows. Every sharp word is just her way of protecting something incredibly soft inside.</p>
+                <p>That contrast is what makes her who she is, and I wouldn't change a single thing about it.</p>
+
+                <h2>My Inspiration</h2>
+                <p>Behind every late night debugging session, every pixel perfect animation, and every ambitious project, Windy is the one behind all of it. She believed in me before I believed in myself. When I doubted my path, she reminded me why I started.</p>
+                <p>She inspires me not just to be a better creator, but a better person. Everything I build, I build with her in mind.</p>
+
+                <h2>To Windy</h2>
+                <p><strong>Thank you for being my home, no matter where we are. I love you.</strong></p>
+            `;
+        }
+
+        // ── Secret "windy" keypress listener ──
+        (function() {
+            let buffer = '';
+            document.addEventListener('keydown', function(e) {
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+                buffer += e.key.toLowerCase();
+                if (buffer.length > 10) buffer = buffer.slice(-10);
+                if (buffer.includes('windy')) {
+                    buffer = '';
+                    openApp('windy');
+                }
+            });
+        })();
 
         // ── Boot Animation ──
         gsap.from('.menu-bar', { opacity: 0, y: -20, duration: 0.5, ease: 'power3.out' });
