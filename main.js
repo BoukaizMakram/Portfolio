@@ -71,6 +71,7 @@ let fillLightHelper = null;
 let rimLightHelper = null;
 
 const loadingScreen = document.getElementById('loading-screen');
+const loadingBarFill = document.getElementById('loading-bar-fill');
 
 // Load GLB scene
 const gltfLoader = new GLTFLoader();
@@ -82,7 +83,7 @@ gltfLoader.load(
     },
     (progress) => {
         const percent = (progress.loaded / progress.total) * 100;
-        console.log(`Loading GLB: ${percent.toFixed(2)}%`);
+        loadingBarFill.style.width = (percent * 0.5) + '%';
     },
     (error) => {
         console.error('Error loading GLB:', error);
@@ -181,7 +182,7 @@ function loadHDREnvironment(gltf) {
         },
         (progress) => {
             const percent = (progress.loaded / progress.total) * 100;
-            console.log(`Loading HDR: ${percent.toFixed(2)}%`);
+            loadingBarFill.style.width = (50 + percent * 0.5) + '%';
         },
         (error) => {
             console.error('Error loading HDR:', error);
@@ -367,10 +368,13 @@ function setupScene(gltf, envTexture) {
         createBoundaryBox();
 
         // Hide loading screen
-        loadingScreen.style.opacity = '0';
+        loadingBarFill.style.width = '100%';
         setTimeout(() => {
-            loadingScreen.style.display = 'none';
-        }, 500);
+            loadingScreen.style.opacity = '0';
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+            }, 600);
+        }, 400);
 
         console.log('GLB scene loaded successfully');
         console.log('Scene has', scene.children.length, 'objects');
