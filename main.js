@@ -428,31 +428,14 @@ const cameraBounds = {
     maxY: 7,
     minZ: 0,
     maxZ: 14,
-    softZone: 2  // Soft boundary zone for smooth easing
 };
 
-// Function to constrain camera position with smooth easing
 function constrainCamera() {
     if (!camera || !controls) return;
 
-    // Smooth boundary constraint with easing
-    const easeOutOfBounds = (value, min, max, softZone) => {
-        if (value < min) {
-            const distance = min - value;
-            const damping = Math.min(distance / softZone, 1);
-            return value + distance * damping * 0.15;  // Smooth push back
-        } else if (value > max) {
-            const distance = value - max;
-            const damping = Math.min(distance / softZone, 1);
-            return value - distance * damping * 0.15;  // Smooth push back
-        }
-        return value;
-    };
-
-    // Apply smooth constraints to each axis
-    camera.position.x = easeOutOfBounds(camera.position.x, cameraBounds.minX, cameraBounds.maxX, cameraBounds.softZone);
-    camera.position.y = easeOutOfBounds(camera.position.y, cameraBounds.minY, cameraBounds.maxY, cameraBounds.softZone);
-    camera.position.z = easeOutOfBounds(camera.position.z, cameraBounds.minZ, cameraBounds.maxZ, cameraBounds.softZone);
+    camera.position.x = Math.max(cameraBounds.minX, Math.min(cameraBounds.maxX, camera.position.x));
+    camera.position.y = Math.max(cameraBounds.minY, Math.min(cameraBounds.maxY, camera.position.y));
+    camera.position.z = Math.max(cameraBounds.minZ, Math.min(cameraBounds.maxZ, camera.position.z));
 }
 
 // Parallax effect state
